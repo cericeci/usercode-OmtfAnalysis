@@ -15,12 +15,16 @@ import plotsSecMuSel
 import plotsDiMu
 
 print "Hello ROOT"
+
 fileName = "../omtfAnalysis.root"
 
 print 'Read data from: ', fileName
 gROOT.Reset()
 f = TFile(fileName);
 f.ls();
+
+if len(sys.argv) > 1:	
+	gROOT.SetBatch(int(sys.argv[1]))
 
 #--------- HERE plots
 
