@@ -10,6 +10,7 @@ public:
   _pt(pt),_eta(eta),_phi(phi),_mass(mass),_charge(charge),_id(pdgid),_status(st),_mid(mother) {}
   virtual ~GenObj() {}
   
+
 public:
   float pt() const { return _pt;}
   float eta() const { return _eta;}
@@ -27,7 +28,6 @@ private:
 public:
   ClassDef(GenObj,1);
 };
-
 
 std::ostream & operator<< (std::ostream &out, const GenObj &o);
 
