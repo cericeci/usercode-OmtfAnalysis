@@ -5,6 +5,8 @@
 class TObjArray;
 class MuonObj;
 class MuonObjColl;
+class GenObj;
+class GenObjColl;
 class TrackObj;
 class L1ObjColl;
 class EventObj;
@@ -15,6 +17,7 @@ public:
   AnaTime(const edm::ParameterSet& cfg);
   void init(TObjArray& histos);
   void run( const EventObj* ev, const MuonObjColl * muons, const TrackObj *track, const L1ObjColl * l1Objs);
+  void run( const EventObj* ev, const GenObjColl * muons, const TrackObj *track, const L1ObjColl * l1Objs);
   bool debug;
 private:
   edm::ParameterSet theCfg;

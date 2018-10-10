@@ -127,3 +127,55 @@ void AnaTime::run(const EventObj* ev, const MuonObjColl *muonColl, const TrackOb
     }
   }
 }
+
+void AnaTime::run(const EventObj* ev, const genObjColl *genColl, const TrackObj* track, const L1ObjColl * l1Objs)
+{
+  std::vector<L1Obj::TYPE> mtfs= {L1Obj::BMTF, L1Obj::OMTF, L1Obj::EMTF, L1Obj::OMTF_emu};
+  //
+  // all triggers
+  //
+  const std::vector<L1Obj> & l1mtfs = *l1Objs;
+  const std::vector<MuonObj> & muons = *genColl;
+  for (const auto & l1mtf : l1mtfs) {
+    bool matched = false;
+    for (const auto & muon : muons) { 
+      if (!muon.isValid()) continue;
+      double deltaR = reco::deltaR( l1mtf.etaValue(), l1mtf.phiValue(), muon.eta, muon.phi);
+      if (deltaR < 0.4) matched=true;
+    }
+    bool qualOK = (l1mtf.q >= 12);
+    TH1D *h,*hQ,*hAll; 
+    h=hQ=hAll=0; 
+    switch (l1mtf.type) {
+        case (L1Obj::BMTF) : h=hTimeBmtf; hQ=hTimeBmtfQ; hAll=hTimeBmtfAll; break;
+        case (L1Obj::OMTF) : h=hTimeOmtf; hQ=hTimeOmtfQ; hAll=hTimeOmtfAll; break;
+        case (L1Obj::EMTF) : h=hTimeEmtf; hQ=hTimeEmtfQ; hAll=hTimeEmtfAll; break;
+        case (L1Obj::OMTF_emu) : h=hTimeOmtf_E; hQ=hTimeOmtfQ_E; hAll=hTimeOmtfAll_E; break;
+        default: ;
+    }
+    if (hAll) hAll->Fill(l1mtf.bx); 
+    if (hQ && qualOK) hQ->Fill(l1mtf.bx); 
+    if (h && qualOK && matched) h->Fill(l1mtf.bx);  
+    //if (h && matched) h->Fill(l1mtf.bx);  
+    }
+
+  // coincidence between triggers.
+  //
+  for (const auto & l1mtf_1 : l1mtfs) {
+    for (const auto & l1mtf_2 : l1mtfs) {
+      double deltaEta = l1mtf_1.etaValue()-l1mtf_2.etaValue();
+      double deltaPhi = reco::deltaPhi( l1mtf_1.phiValue(),  l1mtf_2.phiValue());
+
+      if ( (fabs(deltaEta) > 0.2) || (fabs(deltaPhi >0.05)) ) continue;
+      if (l1mtf_1.type==L1Obj::BMTF && l1mtf_2.type ==  L1Obj::OMTF) {
+         hTimeBmtfOmtf->Fill(l1mtf_1.bx,l1mtf_2.bx);
+      }
+      if (l1mtf_1.type==L1Obj::OMTF && l1mtf_2.type ==  L1Obj::EMTF) {
+         hTimeOmtfEmtf->Fill(l1mtf_1.bx,l1mtf_2.bx);
+      }
+      if (l1mtf_1.type==L1Obj::OMTF && l1mtf_2.type ==  L1Obj::OMTF_emu) {
+         hTimeOmtfOmtf_E->Fill(l1mtf_1.bx,l1mtf_2.bx);
+      }
+    }
+  }
+}
