@@ -4,6 +4,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 class TObjArray;
 class MuonObj;
+class GenObj;
 class L1ObjColl;
 class EventObj;
 #include <vector>
@@ -15,6 +16,10 @@ public:
   MuonObj run( const EventObj* ev, 
                        const std::vector<MuonObj> & muons, 
                        const L1ObjColl * l1Objs);
+  GenObj  run( const EventObj* ev, 
+                       const std::vector<GenObj>  & muons, 
+                       const L1ObjColl * l1Objs);
+
   bool debug;
 private:
   edm::ParameterSet theCfgTrg, theCfgProbe;
