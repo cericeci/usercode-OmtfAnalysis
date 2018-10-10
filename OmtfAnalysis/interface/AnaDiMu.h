@@ -22,7 +22,6 @@ public:
   AnaDiMu(const edm::ParameterSet & cfg) : debug(false) {}
   void init(TObjArray& histos);
   void run( const EventObj* event, 
-            const MuonObjColl* muons,
             const L1ObjColl *l1Coll);
   bool debug;
 

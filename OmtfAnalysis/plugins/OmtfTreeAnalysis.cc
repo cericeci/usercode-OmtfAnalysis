@@ -197,7 +197,7 @@ void OmtfTreeAnalysis::analyze(const edm::Event&, const edm::EventSetup& es)
     if (theAnaSynch)    theAnaSynch->run( event, &muon, ConverterRPCRawSynchroSynchroCountsObj::toRawSynchro( synchroCounts->data));
 
     if (theAnaDataEmul)    theAnaDataEmul->debug = false; 
-    if (theAnaDiMu)   theAnaDiMu->run( event, muonColl, l1ObjColl);
+    if (theAnaDiMu)   theAnaDiMu->run( event, l1ObjColl);
   }
 }
 

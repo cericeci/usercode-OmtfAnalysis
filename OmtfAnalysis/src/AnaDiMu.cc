@@ -54,7 +54,7 @@ void AnaDiMu::init(TObjArray& histos)
   hDiMuCloseE = new TH2D("hDiMuCloseE","hDiMuClose",96,-2.4,2.4, 72, 0.,2*M_PI); histos.Add(hDiMuCloseE);
 }
 
-void AnaDiMu::run(  const EventObj* event, const MuonObjColl* muons, const L1ObjColl *l1Coll)
+void AnaDiMu::run(  const EventObj* event, const L1ObjColl *l1Coll)
 {
   std::vector<L1Obj> vEmul = l1Coll->selectByType(L1Obj::uGMT_emu).selectByBx(0,0).selectByQuality(8).getL1Objs();
   std::vector<L1Obj> vData = l1Coll->selectByType(L1Obj::uGMT).selectByBx(0,0).selectByQuality(8).getL1Objs();
@@ -78,13 +78,7 @@ void AnaDiMu::run(  const EventObj* event, const MuonObjColl* muons, const L1Obj
     hDiMuDistanceE_phi->Fill(reco::deltaPhi(vEmul[1].phiValue(), vEmul[0].phiValue()));
     if (deltaR < 0.25) hDiMuCloseE->Fill(vEmul[0].etaValue(), vEmul[0].phiValue());
     if (deltaR < 0.25) {
-//  if (vData.size()==1) std::cout<< *event <<" Delta R: " << deltaR <<std::endl <<*muons<<std::endl<<l1Coll->selectByBx(0,0)<<std::endl;
     }
-  }
- 
- 
-  
-   
- 
+  } 
 }	
 
