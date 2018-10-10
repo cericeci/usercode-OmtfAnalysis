@@ -8,6 +8,7 @@
 #include "TGraphErrors.h"
 #include "TF1.h"
 #include "UserCode/OmtfDataFormats/interface/MuonObj.h"
+#include "UserCode/OmtfDataFormats/interface/GenObj.h"
 #include "UserCode/OmtfAnalysis/interface/Utilities.h"
 
 #include <cmath>
@@ -85,6 +86,39 @@ bool AnaMuonDistribution::filter(const MuonObj *muon)
   return true;
 }
 
+bool AnaMuonDistribution::filter(const GenObj *muon)
+{
+//  Duplicated just in case we later want to add gen or reco specific plots
+//  std::cout << *muon << std::endl;
+
+  //if (requireUnique  && !muon->isUnique) return false;
+  //if (requireGlobal  && !muon->isGlobal()) return false;
+  //if (requireInner   && !muon->isTracker()) return false;
+  //if (requireOuter   && !muon->isOuter()) return false;
+  //if (requireLoose   && !muon->isLoose) return false;
+  //if (requireMedium  && !muon->isMedium) return false;
+  //if (requireTight   && !muon->isTight) return false;
+  //if (requireTkIso   && !muon->isTkIsolated) return false;
+  //if (requirePFIso   && !muon->isPFIsolated) return false;
+  //if (muon->chi2Norm >  chi2Norm) return false;
+  if (muon->pt() < ptMin) return false;
+  if (fabs(muon->eta()) > etaMax) return false;
+  //if (muon->nMatchedStations < minNumberOfMatchedStations) return false;
+  //if (muon->nTrackerHits < minNumberTkHits) return false;
+  //if (muon->nRPCHits < minNumberRpcHits) return false;
+  //if (muon->nDTHits + muon->nCSCHits < minNumberDtCscHits) return false;
+  //if (muon->nRPCHits + muon->nDTHits + muon->nCSCHits < minNumberRpcDtCscHits) return false;
+
+  hMuonPt_DIS->Fill(muon->pt());
+  hMuonEta_DIS->Fill(muon->eta());
+  hMuonPhi_DIS->Fill(muon->phi());
+
+  hMuonPtVsEta_Tk->Fill(muon->eta(), muon->pt());
+  //if (muon->isMatched() ) hMuonPtVsEta_Ma->Fill(muon->eta(), muon->pt());
+  //if (muon->isGlobal()) hMuonPtVsEta_Gl->Fill(muon->eta(), muon->pt());
+  return true;
+}
+
 void AnaMuonDistribution::run(const MuonObj *muon)
 {
 //  std::cout << *muon << std::endl;
@@ -93,3 +127,10 @@ void AnaMuonDistribution::run(const MuonObj *muon)
   if (hMuonPhi_MEN) hMuonPhi_MEN->Fill(muon->phi());
 }
 
+void AnaMuonDistribution::run(const GenObj *muon)
+{
+//  Duplicated just in case we later want to add gen or reco specific plots
+  if (hMuonPt_MEN)  hMuonPt_MEN->Fill(muon->pt());
+  if (hMuonEta_MEN) hMuonEta_MEN->Fill(muon->eta());
+  if (hMuonPhi_MEN) hMuonPhi_MEN->Fill(muon->phi());
+}

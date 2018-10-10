@@ -4,6 +4,7 @@
 
 class TObjArray;
 class MuonObj;
+class GenObj;
 namespace edm {class ParameterSet;}
 
 class AnaMuonDistribution {
@@ -12,7 +13,9 @@ public:
   void init(TObjArray& histos);
   bool filter(const MuonObj* muon);
   void run(const MuonObj* muon);
-  
+  bool filter(const GenObj* muon);
+  void run(const GenObj* muon);  
+
 private:
   double ptMin, etaMax, chi2Norm;
   unsigned int  minNumberOfMatchedStations, minNumberTkHits, minNumberRpcHits, minNumberDtCscHits, minNumberRpcDtCscHits;
