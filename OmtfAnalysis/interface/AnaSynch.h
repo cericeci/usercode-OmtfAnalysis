@@ -22,7 +22,7 @@ class AnaSynch {
 public:
   AnaSynch();
   void init(TObjArray& histos);
-  void run( const EventObj* event, const MuonObj* muon, const  RPCRawSynchro::ProdItem & synchro);
+  void run( const EventObj* event, const  RPCRawSynchro::ProdItem & synchro);
   void beginRun(const edm::Run& ru, const edm::EventSetup& es);
   void endJob();
 private:

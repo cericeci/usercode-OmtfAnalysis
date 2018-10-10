@@ -81,7 +81,7 @@ void AnaSynch::beginRun(const edm::Run&, const edm::EventSetup& es)
 }
 
 
-void AnaSynch::run( const EventObj* event, const MuonObj* muon, const  RPCRawSynchro::ProdItem & synchro)
+void AnaSynch::run( const EventObj* event, const  RPCRawSynchro::ProdItem & synchro)
 {
   std::vector<LinkBoardElectronicIndex> problems;
   theSynchroStat.add(synchro, problems);
