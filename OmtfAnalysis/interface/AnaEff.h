@@ -6,6 +6,7 @@ class TH1D;
 class TGraph;
 
 class MuonObj;
+class GenObj;
 class L1ObjColl;
 class L1Obj;
 class EventObj;
@@ -21,6 +22,8 @@ public:
   AnaEff(const edm::ParameterSet & cfg) : debug(false) {}
   void init(TObjArray& histos);
   void run( const EventObj* event, const MuonObj* muon,
+            const L1ObjColl *l1Coll);
+  void run( const EventObj* event, const GenObj* muon,
             const L1ObjColl *l1Coll);
   void resume(TObjArray& histos);
   bool debug;
