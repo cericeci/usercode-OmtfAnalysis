@@ -20,7 +20,7 @@ public:
   int status() const { return _status;}
   int motherId() const { return _mid;}
   int charge() const { return _charge;}
-
+  bool isValid() const {return  (pt()>0.001 && charge()!=0); } 
 private:  
   float _pt,_eta,_phi,_mass; 
   int _charge,_id,_status,_mid; 
