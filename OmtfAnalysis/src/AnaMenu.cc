@@ -20,7 +20,7 @@ void  AnaMenu::updateMenu(const std::vector<std::string> & menuL1, const std::ve
   if (menuHLT.size() != 0) theMenuHLT = menuHLT;
 }
 
-bool AnaMenu::filter( const EventObj* ev, const MuonObj* muon,
+bool AnaMenu::filter( const EventObj* ev,
                       const TriggerMenuResultObj *bitsL1,
                       const TriggerMenuResultObj *bitsHLT)
 
@@ -82,6 +82,7 @@ bool AnaMenu::filter( const EventObj* ev, const MuonObj* muon,
   } else return  false;
 
 }
+
 
 void AnaMenu::resume(TObjArray& histos)
 {

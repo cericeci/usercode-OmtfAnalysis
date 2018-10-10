@@ -167,7 +167,7 @@ void OmtfTreeAnalysis::analyze(const edm::Event&, const edm::EventSetup& es)
     // ANALYSE AND FILTER KINEMCTICS
     if ( theAnaMuonDistribution && !theAnaMuonDistribution->filter(&muon) && theConfig.getParameter<bool>("filterByAnaMuonDistribution") ) continue;
     // ANALYSE AND FILTER TRIGGER MENU
-    if ( theAnaMenu && !theAnaMenu->filter(event, &muon, bitsL1, bitsHLT) && theConfig.getParameter<bool>("filterByAnaMenu") ) continue;
+    if ( theAnaMenu && !theAnaMenu->filter(event, bitsL1, bitsHLT) && theConfig.getParameter<bool>("filterByAnaMenu") ) continue;
 
 
 //

@@ -17,7 +17,7 @@ public:
   AnaMenu(const edm::ParameterSet& cfg) : debug(false), theConfig(cfg) {}
   void init(TObjArray& histos);
   void updateMenu(const std::vector<std::string> & menuL1, const std::vector<std::string> & menuHLT);
-  bool filter( const EventObj* ev, const MuonObj* muon, 
+  bool filter( const EventObj* ev, 
                const TriggerMenuResultObj *bitsL1,
                const TriggerMenuResultObj *bitsHLT);
 
