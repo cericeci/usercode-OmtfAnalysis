@@ -6,6 +6,8 @@
 #include "UserCode/OmtfDataFormats/interface/TrackObj.h"
 #include "UserCode/OmtfDataFormats/interface/MuonObj.h"
 #include "UserCode/OmtfDataFormats/interface/MuonObjColl.h"
+#include "UserCode/OmtfDataFormats/interface/GenObj.h"
+#include "UserCode/OmtfDataFormats/interface/GenObjColl.h"
 #include "UserCode/OmtfDataFormats/interface/EventObj.h"
 #include "UserCode/OmtfDataFormats/interface/L1ObjColl.h"
 #include "UserCode/OmtfAnalysis/interface/Utilities.h"
@@ -128,14 +130,14 @@ void AnaTime::run(const EventObj* ev, const MuonObjColl *muonColl, const TrackOb
   }
 }
 
-void AnaTime::run(const EventObj* ev, const genObjColl *genColl, const TrackObj* track, const L1ObjColl * l1Objs)
+void AnaTime::run(const EventObj* ev, const GenObjColl *genColl, const TrackObj* track, const L1ObjColl * l1Objs)
 {
   std::vector<L1Obj::TYPE> mtfs= {L1Obj::BMTF, L1Obj::OMTF, L1Obj::EMTF, L1Obj::OMTF_emu};
   //
   // all triggers
   //
   const std::vector<L1Obj> & l1mtfs = *l1Objs;
-  const std::vector<MuonObj> & muons = *genColl;
+  const std::vector<GenObj> & muons = *genColl;
   for (const auto & l1mtf : l1mtfs) {
     bool matched = false;
     for (const auto & muon : muons) { 
